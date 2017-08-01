@@ -3,7 +3,6 @@ package hello;
 import javax.sql.DataSource;
 
 import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -19,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 @EnableBatchProcessing
@@ -79,7 +77,7 @@ public class BatchConfiguration {
     @Bean
     public Step step1() {
         return stepBuilderFactory.get("step1")
-                .<Person, Person> chunk(10)
+                .<Person, Person> chunk(5)
                 .reader(reader())
                 .processor(processor())
                 .writer(writer())
